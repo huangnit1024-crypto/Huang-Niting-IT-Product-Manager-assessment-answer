@@ -24,7 +24,7 @@ Core Scenarios:
 •	Manually intervening in "abnormal" orders, such as processing a refund or cancelling a fraudulent transaction.<br><br>
   
   
-2.	MVP Feature List and Priority
+2.	MVP Feature List and Priority  
 
 | Module        | Feature             | Priority | Reason                                                                                                                                                                                                                                                                                                                                |
 | ------------- | ------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -45,7 +45,8 @@ Core Scenarios:
 | Admin Side    | Data Dashboard      | P2       | The feature focuses on long-term business intelligence and strategic growth rather than the immediate functional success of the Browse-to-Complete Order transaction flow.                                                                                                                                                            |
 
 
-3.	Core Process Design  
+3.	Core Process Design
+
 A: Customer order and payment process  
 Process in details:  
 •	Customer browses Product List and selects an item.  
