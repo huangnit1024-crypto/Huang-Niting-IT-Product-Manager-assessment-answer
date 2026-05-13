@@ -2,10 +2,10 @@
 1.	User Roles and Core Scenarios
 
 Role A: Customer  
-The primary driver of revenue. An external end-user whose primary objective is to discover, select, and acquire products through the platform.  
+The primary driver of revenue. An external user whose primary objective is to discover, select, and acquire products through the platform.  
 Core Scenarios:  
 •	Searching for specific items or browsing categories to find products.  
-•	Viewing product details and adding items to a virtual cart.  
+•	Viewing product details and adding items to shopping cart.  
 •	Entering shipping details and completing a secure payment.  
 •	Receiving order confirmations and tracking the status of their shipment until delivery.
 
@@ -205,7 +205,7 @@ How to investigate: Look at the user's session logs to see when the item was add
 | Metric                | Meaning                                                                                                     | Why it matters                                                                                                                |
 | --------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
 | Checkout abandon rate | The percentage of users who add items to their cart but do not reach the Submit Order stage.              | High abandonment indicates friction in the checkout process, such as unexpected costs, a complex form, or technical bugs.     |
-| Stock-out rate        | The frequency with which customers attempt to buy an item only to receive an "Insufficient inventory" error | This measures the quality of inventory management feature. Frequent stock-outs lead to customer frustration. |
+| Stock-out rate        | The frequency with which customers attempt to buy an item only to receive an "Insufficient inventory" error | This measures the quality of inventory management feature. Frequent stock-outs might lead to customer unsatisfaction. |
 | Average Order Value   | The average amount spent each time a customer completes an order.                                           | It helps understand if your "Add to Cart" and "Browse" stages are encouraging users to buy more.                              |
 | Return/Refund rate    | The percentage of completed orders that result in a customer requesting a return or refund.                | A high return rate signals problems with product quality or misleading product detail pages during the Browse stage.        |
 | Repeat Purchase Rate  | The percentage of customers who return to place a second order after their first order is marked Complete | This measures long-term platform health. Getting them to return is how the platform becomes more profitable.                  |  
