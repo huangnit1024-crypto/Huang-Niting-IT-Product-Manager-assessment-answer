@@ -148,8 +148,7 @@ On the one hand, the Add to Cart and Buy Now buttons must be disabled. On the ot
 (1)  
 This function is a backend validation check used to determine if a specific order request is eligible for submission based on product inventory. It is a standard before a customer can proceed to the payment stage, ensuring that staff can actually fulfill the order being placed.  
 (2)  
-According to the code logic, the order submission will fail under any of the following three conditions:  
-•	Product Status: The product's status is anything other than on sale.
+•	Product Status: The product's status is anything other than on sale.  
 •	Zero Inventory: The specific SKU stock level is zero or less.  
 •	Excessive Quantity: The quantity the user is attempting to purchase is greater than the current available stock.  
 (3)  
@@ -159,7 +158,7 @@ reason: Purchase quantity exceeds available inventory
 •	Address Validation: To confirm that the physical location exists and is formatted correctly for mail carriers.  
 •	Shipping validation: To ensure the specific items can be legally or physically delivered to that verified location.  
 •	Minimum Order Threshold: Ensure the total order value meets any minimum spend requirements required by the platform for processing a transaction.  
-•	Coupon and Promotion Validity: Re-validate any applied discount codes or promotional offers to ensure they have not expired and that the order still meets the necessary eligibility criteria (this can be considered after the initial version of platform).  
+•	Coupon and Promotion Validity: Re-validate any applied discount codes or promotional offers to ensure they have not expired and that the order still meets the necessary eligibility criteria (this can be considered after the initial version of platform design).  
 
 
 7.	Order Status Understanding Question  
