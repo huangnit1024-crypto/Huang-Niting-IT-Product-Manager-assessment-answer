@@ -13,14 +13,14 @@ Role B: Operations Staff
 An internal business user responsible for the day-to-day activities of the product catalog and the physical fulfilment of customer orders.  
 Core Scenarios:  
 •	Creating new product listings, uploading images, and adjusting prices or descriptions.  
-•	Updating stock levels to prevent overselling.
+•	Updating stock levels to prevent overselling.  
 •	Viewing new paid orders, preparing the physical package, and updating the status to Shipped with tracking information.  
  
 Role C: Platform Admin  
 An internal business user who controls user permissions and settings to keep the platform secure.  
 Core Scenarios:  
-•	Creating and managing accounts for Operations Staff.
-•	Monitoring total sales volume and identifying system errors.
+•	Creating and managing accounts for Operations Staff.  
+•	Monitoring total sales volume and identifying system errors.  
 •	Manually intervening in abnormal orders, such as processing a refund or cancelling a fraudulent transaction.<br><br>
   
   
@@ -81,7 +81,7 @@ Product Detail Page
 •	Feature background:  
 The Product Detail Page is an important stage in the customer journey. It is where a user transitions from just browsing to intent to buy. The page must provide enough information to answer all customer questions and remove doubt from the Add to Cart action.
 •	User Goal:  
-As Customers, they want to view comprehensive details about a specific so that I can decide whether to add it to shopping cart and proceed to payment.
+As Customers, they want to view comprehensive details about a specific so that I can decide whether to add it to shopping cart and proceed to payment.  
 •	Page field:  
 
 | Name                | Description                                                                                                                                    |
@@ -122,7 +122,7 @@ As Customers, they want to view comprehensive details about a specific so that I
 •	White: SKU: 20001; Price: 19900 cents; Stock: 10  
 •	Black: SKU: 20002; Price: 20900 cents; Stock: 15  
 (2)  
-Displayed price: $199.00
+Displayed price: $199.00  
 (3)  
 On the one hand, the Add to Cart and Buy Now buttons must be disabled. On the other hand, a clear "Product Unavailable" or "Off-Sale" banner should appear prominently. If the product will be restocked, the product detail page still need to be remained. If, however, the product would not be restocked, the product detail page should ideally be removed from search results and the Product List module, so customers would not feel confused about the product.  
 
@@ -158,10 +158,11 @@ reason: Purchase quantity exceeds available inventory
 •	Address Validation: To confirm that the physical location exists and is formatted correctly for mail carriers.  
 •	Shipping validation: To ensure the specific items can be legally or physically delivered to that verified location.  
 •	Minimum Order Threshold: Ensure the total order value meets any minimum spend requirements required by the platform for processing a transaction.  
-•	Coupon and Promotion Validity: Re-validate any applied discount codes or promotional offers to ensure they have not expired and that the order still meets the necessary eligibility criteria (this can be considered after the initial version of platform design).  
+•	Coupon and Promotion Validity: Re-validate any applied discount codes or promotional offers to ensure they have not expired and that the order still meets the necessary eligibility criteria (this can be considered after the initial version of platform design).<br><br>
 
 
-7.	Order Status Understanding Question  
+7.	Order Status Understanding Question
+
 (1)  
 Pending Payment  
 (2)  
@@ -169,7 +170,7 @@ Paid
 (3)  
 Shipped  
 (4)  
-Cancelled
+Cancelled  
 (5)  
 Paid, Shipped, Cancelled  
 (6)  
