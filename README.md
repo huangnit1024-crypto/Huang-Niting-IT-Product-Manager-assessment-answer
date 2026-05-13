@@ -63,7 +63,150 @@ Status Changes:
 •	Pending payment – Paid (Success)  
 •	Pending payment– Order cancelled (Timeout/User action)  
 
+B: Order shipment process  
+•	Operations staff uses the Order Management feature to filter the system for orders with the status paid.  
+•	Staff prepares the physical package (Picking/Packing). The Inventory Management feature ensures the stock is accurately decremented and reflects the physical count.  
+•	Staff uses the Shipment Management feature to enter the tracking number and select the third-party carrier.  
+•	System updates the status to shipped.  
+•	Once the carrier confirms delivery, the status updates to completed.  
+Exception Scenarios:  
+•	If the staff finds the item is damaged or missing during packing, which causes insufficient inventory, then the order is flagged as Abnormal/Out of Stock and the customer is notified.  
+•	If the Shipment Management system cannot validate the address with the carrier, the process pauses at the Paid status until the customer provides a corrected address.  
+Status Changes:  
+Paid – Preparing – Shipped -- Completed<br><br>
 
+4.	Simplified PRD
+
+Product Detail Page  
+•	Feature background:  
+The Product Detail Page is an important stage in the customer journey. It is where a user transitions from "just browsing" to "intent to buy." The page must provide enough information to answer all customer questions and remove doubt from the Add to Cart action.
+•	User Goal:  
+As Customers, they want to view comprehensive details about a specific so that I can decide whether to add it to my shopping cart and proceed to checkout.
+•	Page field:  
+
+| Name                | Description                                                                                                                                    |
+| ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| Product name        | The official title of the item                                                                                                                 |
+| Images              | Product gallery (main image + thumbnails)                                                                                                      |
+| Price               | Current selling price                                                                                                                          |
+| Description         | Detailed specifications                                                                                                                        |
+| SKU                 | Unique identifier for internal inventory tracking                                                                                              |
+| Stock Status        | Indicates if the item is "In Stock" or "Out of Stock."                                                                                         |
+| Quantity Selector   | Plus and minus buttons to select numbers of items                                                                                              |
+| Add to Cart/Buy now | Action button to make next moves of the purchase                                                                                               |
+| Ratings and Reviews | A dedicated section displaying the cumulative star rating and qualitative customer feedback to build trust and assist in the browsing process. |  
+
+•	Business Rules  
+Administrative Editing and Access Control:  
+Content on the Product Details Page can only be created and modified via the authenticated Product Management module. Access is restricted to staff with access permissions.  
+
+Marketability Restriction:   
+The system must verify the product status before enabling any transaction actions. If the status is anything other than on sale, the "Add to Cart" and "Buy Now" buttons must be disabled, and the status label must display "Product is off sale".  
+
+Zero-Stock Enforcement:  
+The page must perform a real-time check of the inventory level for the selected variant. If the stock level is less than or equal to 0, the system must block the purchase flow and display the exception message: "Insufficient inventory".  
+
+Quantity Validation Rule:  
+The user's selected purchase count is strictly limited by the available inventory levels. The quantity selector component must prevent the user from incrementing the value beyond the current stock count. If a user manually enters a number where intended purchase number is higher than stock, the system must return the error: "Purchase quantity exceeds available inventory".  
+
+5.	API Understanding Question
+
+(1)  
+•	Product name: Bluetooth Earphones  
+•	Product ID: 10001  
+•	Status: on sale  
+•	Current price: 19900 cents  
+•	Original price: 29900 cents  
+•	Total stock: 25  
+•	Sales count: 132  
+•	Images: The main product image via the provided URL.  
+•	Product colour options: white and black  
+•	White: SKU:20001; Price: 19900 cents; Stock: 10  
+•	Black: SKU:20002; Price:20900 cents; Stock: 15  
+(2)  
+Displayed price: $199.00
+(3)  
+On the one hand, the "Add to Cart" and "Buy Now" buttons must be disabled. On the other hand, a clear "Product Unavailable" or "Off-Sale" banner should appear prominently. If the product will be restocked, the product detail page still need to be remained. If, however, the product would not be restocked, the product detail page should ideally be removed from search results and the "Product List" module, so customers would not feel confused about the product.  
+
+(4)  
+•	The button should be disabled (non-clickable).  
+•	The label should change from "Add to Cart" to "Out of Stock" or "Sold Out."  
+•	The purchase button should be replaced with a "Notify Me When Available" button to capture user interest.  
+
+(5)  
+When the user clicks the "Black" option, the page must update dynamically based on the SKU List data:  
+•	Price: The displayed price should update from $199.00 to $209.00.  
+•	Inventory: The displayed stock should update to 15.  
+
+(6)  
+
+| Missing field        | Why it matters                                                                                                                                            |
+| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Product description  | Necessary to explain product features, specifications, and benefits to the customer.                                                                      |
+| Rating/Reviews       | Important for building trust; customers often rely on peer reviews before purchasing electronics.                                                         |
+| Shipment information | Details such as estimated delivery dates or shipping costs are important for final conversion.                                                            |
+| Return policy        | Clearly stating the return policy on the product detail page significantly impacts conversion rates and manages customer expectations post-purchase.      |
+| Warranty information | For electronics like "Bluetooth Earphones," a warranty is a major factor in overcoming purchase hesitation and reducing the perceived risk for the buyer. |  
+
+6.	Simple Logic Reading Question
+
+(1)  
+This function is a backend validation check used to determine if a specific order request is eligible for submission based on product inventory. It is a standard before a customer can proceed to the payment stage, ensuring that staff can actually fulfill the order being placed.  
+(2)  
+According to the code logic, the order submission will fail under any of the following three conditions:  
+•	Product Status: The product's status is anything other than 'ON_SALE' (e.g., it is drafted, archived, or manually taken off-shelf).  
+•	Zero Inventory: The specific SKU stock level is zero or less.  
+•	Excessive Quantity: The quantity the user is attempting to purchase is greater than the current available stock.  
+(3)  
+canSubmit: false  
+reason: Purchase quantity exceeds available inventory  
+(4)  
+
+7.	Order Status Understanding Question  
+(1)  
+Pending Payment  
+(2)  
+Paid  
+(3)  
+Shipped  
+(4)  
+Cancelled
+(5)  
+Paid, Shipped, Cancelled  
+(6)  
+•	Pending Payment – Paid – Shipped – Completed;  
+•	Pending Payment – Cancelled;  
+•	Pending Payment – Paid – Refunding -- Refunded;  
+•	Pending Payment – Paid – Shipped – Refunding – Refunded;  
+•	Pending Payment – Paid – Shipped – Completed -- Refunding – Refunded.
+
+8.	Bug/Exception Analysis Question
+
+•	Data Caching:  
+Cause: The product detail page uses caching to improve performance. The inventory shown to the customer might be a cached snapshot that is several minutes old, while the actual backend database has already reached zero.  
+How to investigate: Verifying if the Product Detail Page is serving inventory data from a cache with a long time, which would cause the frontend to display old information.  
+
+•	Concurrent Orders:  
+Cause: This occurs when multiple customers are viewing the same product simultaneously. In this scenario, another customer successfully placed an order for that last remaining item in the brief window of time between when the current user loaded the page and when they clicked "submit".  
+How to investigate: Using Order Management feature to review the application logs to determine if another customer successfully completed an order for the remaining unit during the interval between the user’s page load and their order submission.  
+
+•	Inventory Inconsistency:  
+Cause: A product may have multiple variations (SKUs), such as different sizes or colors. The frontend might be incorrectly displaying the total inventory for the parent product, while the specific SKU inventory selected by the user is actually out of stock.  
+How to investigate: Utilize the platform's Inventory Management feature—designed for Operations Staff to manage stock—to perform a side-by-side verification between the Total Product Inventory and SKU-specific counts to determine if the frontend is pulling aggregate data while the Order API correctly validates against individual variants.  
+
+•	Shopping Cart Data error:  
+Cause: A product may have become invalid or out of stock while sitting in the user's shopping cart. If the system does not dynamically update the cart status, the user only discovers the inventory is gone when the order submission API performs its final mandatory check.  
+How to investigate: Look at the user's session logs to see when the item was added to the cart, and compare the adding time with product invalid time.  
+
+9.	Core Metrics Design
+
+| Metric                | Meaning                                                                                                     | Why it matters                                                                                                                |
+| --------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| Checkout abandon rate | The percentage of users who add items to their cart but do not reach the "Submit Order" stage.              | High abandonment indicates friction in the checkout process, such as unexpected costs, a complex form, or technical bugs.     |
+| Stock-out rate        | The frequency with which customers attempt to buy an item only to receive an "Insufficient inventory" error | This measures the quality of inventory management feature. Frequent stock-outs lead to customer frustration and lost revenue. |
+| Average Order Value   | The average amount spent each time a customer completes an order.                                           | It helps understand if your "Add to Cart" and "Browse" stages are encouraging users to buy more.                              |
+| Return/Refund rate    | The percentage of "Complete Orders" that result in a customer requesting a return or refund.                | A high return rate signals problems with product quality or misleading product detail pages during the "Browse" stage.        |
+| Repeat Purchase Rate  | The percentage of customers who return to place a second order after their first order is marked "Complete" | This measures long-term platform health. Getting them to return is how the platform becomes more profitable.                  |  
 
 
 
