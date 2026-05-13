@@ -10,11 +10,11 @@ Core Scenarios:
 •	Receiving order confirmations and tracking the status of their shipment until delivery.
 
 Role B: Operations Staff  
-An internal business user responsible for the day-to-day maintenance of the product catalog and the physical fulfilment of customer orders.  
+An internal business user responsible for the day-to-day activities of the product catalog and the physical fulfilment of customer orders.  
 Core Scenarios:  
 •	Creating new product listings, uploading images, and adjusting prices or descriptions.  
 •	Updating stock levels to prevent overselling.
-•	Viewing new paid orders, preparing the physical package, and updating the status to Shipped with tracking info.  
+•	Viewing new paid orders, preparing the physical package, and updating the status to Shipped with tracking information.  
  
 Role C: Platform Admin  
 An internal business user who controls user permissions and settings to keep the platform secure.  
@@ -51,7 +51,7 @@ A: Customer order and payment process
 Process in details:  
 •	Customer browses Product List and selects an item.  
 •	Customer enters Product Detail Page and adds the item to the Shopping Cart.  
-•	Customer clicks Submit Order, creating an order record in the database.  
+•	Customer clicks Submit Order, creating an order record.  
 •	Customer proceeds to Payment and enters payment information.  
 •	System receives a "Success" signal from the payment gateway.  
 •	Order status updates to Paid; inventory is officially deducted.  
@@ -65,9 +65,9 @@ Status Changes:
 
 B: Order shipment process  
 •	Operations staff uses the Order Management feature to filter the system for orders with the status paid.  
-•	Staff prepares the physical package (Picking/Packing). The Inventory Management feature ensures the stock is accurately decremented and reflects the physical count.  
+•	Staff prepares the physical package. The Inventory Management feature ensures the stock is accurately decreased and reflects the physical count.  
 •	Staff uses the Shipment Management feature to enter the tracking number and select the third-party carrier.  
-•	System updates the status to shipped.  
+•	The platform updates the status to shipped.  
 •	Once the carrier confirms delivery, the status updates to completed.  
 Exception Scenarios:  
 •	If the staff finds the item is damaged or missing during packing, which causes insufficient inventory, then the order is flagged as abnormal/out of stock and the customer is notified.  
@@ -81,7 +81,7 @@ Product Detail Page
 •	Feature background:  
 The Product Detail Page is an important stage in the customer journey. It is where a user transitions from just browsing to intent to buy. The page must provide enough information to answer all customer questions and remove doubt from the Add to Cart action.
 •	User Goal:  
-As Customers, they want to view comprehensive details about a specific so that I can decide whether to add it to my shopping cart and proceed to checkout.
+As Customers, they want to view comprehensive details about a specific so that I can decide whether to add it to shopping cart and proceed to payment.
 •	Page field:  
 
 | Name                | Description                                                                                                                                    |
@@ -131,20 +131,17 @@ On the one hand, the Add to Cart and Buy Now buttons must be disabled. On the ot
 •	The label should change from Add to Cart to Out of Stock. 
 •	The purchase button should be replaced with a "Notify Me When Available" button to capture user interest.  
 
-(5)  
-When the user clicks the "Black" option, the page must update dynamically based on the SKU List data:  
-•	Price: The displayed price should update from $199.00 to $209.00.  
-•	Inventory: The displayed stock should update to 15.  
+(5)   
+•	Price: from $199.00 to $209.00  
+•	Inventory: update to 15  
 
 (6)  
 
-| Missing field        | Why it matters                                                                                                                                            |
-| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Product description  | Necessary to explain product features, specifications, and benefits to the customer.                                                                      |
-| Rating/Reviews       | Important for building trust; customers often rely on peer reviews before purchasing electronics.                                                         |
-| Shipment information | Details such as estimated delivery dates or shipping costs are important for final conversion.                                                            |
-| Return policy        | Clearly stating the return policy on the product detail page significantly impacts conversion rates and manages customer expectations post-purchase.      |
-| Warranty information | For electronics like Bluetooth Earphones, a warranty is a major factor in overcoming purchase hesitation and reducing the perceived risk for the buyer. |  
+| Missing field           | Why it matters                                                                                                                                                                                                                                  |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Product description     | A detailed description is essential for customers to understand the specific features and technical specifications of the earphones before they decide to buy. Description will change if customers click on different versions of the product. |
+| Rating/Reviews          | Displaying social proof through star ratings and review counts builds consumer trust and increases the likelihood of a conversion. The field will change if customers click on different versions of the product.                               |
+| Estimated Delivery Time | Providing a general delivery timeline on the product page helps manage customer expectations regarding when they will actually receive their order.                                                                                             |
 
 6.	Simple Logic Reading Question
 
